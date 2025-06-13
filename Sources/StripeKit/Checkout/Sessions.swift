@@ -12,6 +12,8 @@ public struct Session: Codable {
     public var id: String
     /// The URL the customer will be directed to if they decide to cancel payment and return to your website.
     public var cancelUrl: String?
+    /// The URL the customer will be directed to on completion of an embedded session.
+    public var returnUrl: String?
     /// A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or similar, and can be used to reconcile the session with your internal systems.
     public var clientReferenceId: String?
     /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
@@ -115,6 +117,7 @@ public struct Session: Codable {
     
     public init(id: String,
                 cancelUrl: String? = nil,
+                returnUrl: String? = nil,
                 clientReferenceId: String? = nil,
                 currency: Currency? = nil,
                 customer: String? = nil,
@@ -166,6 +169,7 @@ public struct Session: Codable {
                 uiMode: UIMode? = nil) {
         self.id = id
         self.cancelUrl = cancelUrl
+        self.returnUrl = returnUrl
         self.clientReferenceId = clientReferenceId
         self.currency = currency
         self._customer = Expandable(id: customer)

@@ -52,6 +52,7 @@ public protocol SessionRoutes {
                 uiMode: UIMode?,
                 successUrl: String?,
                 cancelUrl: String?,
+                returnUrl: String?,
                 clientReferenceId: String?,
                 currency: Currency?,
                 customer: String?,
@@ -127,6 +128,7 @@ public struct StripeSessionRoutes: SessionRoutes {
                        uiMode: UIMode?,
                        successUrl: String?,
                        cancelUrl: String? = nil,
+                       returnUrl: String? = nil,
                        clientReferenceId: String? = nil,
                        currency: Currency? = nil,
                        customer: String? = nil,
@@ -173,6 +175,10 @@ public struct StripeSessionRoutes: SessionRoutes {
         
         if let cancelUrl {
             body["cancel_url"] = cancelUrl
+        }
+        
+        if let returnUrl {
+            body["return_url"] = returnUrl
         }
         
         if let clientReferenceId {
