@@ -50,7 +50,7 @@ public protocol SessionRoutes {
     func create(lineItems: [[String: Any]]?,
                 mode: SessionMode,
                 uiMode: UIMode?,
-                successUrl: String,
+                successUrl: String?,
                 cancelUrl: String?,
                 clientReferenceId: String?,
                 currency: Currency?,
@@ -125,7 +125,7 @@ public struct StripeSessionRoutes: SessionRoutes {
     public func create(lineItems: [[String: Any]]? = nil,
                        mode: SessionMode,
                        uiMode: UIMode?,
-                       successUrl: String,
+                       successUrl: String?,
                        cancelUrl: String? = nil,
                        clientReferenceId: String? = nil,
                        currency: Currency? = nil,
@@ -157,8 +157,11 @@ public struct StripeSessionRoutes: SessionRoutes {
                        subscriptionData: [String: Any]? = nil,
                        taxIdCollection: [String: Any]? = nil,
                        expand: [String]? = nil) async throws -> Session {
-        var body: [String: Any] = ["mode": mode.rawValue,
-                                   "success_url": successUrl]
+        var body: [String: Any] = ["mode": mode.rawValue]
+        
+        if let successUrl {
+            body["success_url"] = successUrl
+        }
         
         if let uiMode {
             body["ui_mode"] = uiMode.rawValue
