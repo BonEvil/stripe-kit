@@ -12,7 +12,9 @@ public struct Session: Codable {
     public var id: String
     /// The URL the customer will be directed to if they decide to cancel payment and return to your website.
     public var cancelUrl: String?
-    /// The URL the customer will be directed to on completion of an embedded session.
+    /// Applies to Checkout Sessions with `ui_mode: embedded` or `ui_mode: custom`.
+    ///
+    /// The URL to redirect your customer back to after they authenticate or cancel their payment on the payment method’s app or site.
     public var returnUrl: String?
     /// A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or similar, and can be used to reconcile the session with your internal systems.
     public var clientReferenceId: String?
@@ -913,7 +915,9 @@ public struct SessionList: Codable {
     }
 }
 
+/// The UI mode of the ``Session``. Defaults to `hosted`.
 public enum UIMode: String, Codable {
-    case hosted
+    case custom
     case embedded
+    case hosted
 }
