@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Vapor
 
 /// The [Subscription Object](https://stripe.com/docs/api/subscriptions/object)
-public struct Subscription: Codable {
+public struct Subscription: @unchecked Sendable, Codable, Content {
     /// Unique identifier for the object.
     public var id: String
     /// If the subscription has been canceled with the `at_period_end` flag set to `true`, `cancel_at_period_end` on the subscription will be `true`. You can use this attribute to determine whether a subscription that has a status of active is scheduled to be canceled at the end of the current period.
