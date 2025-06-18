@@ -5,9 +5,10 @@
 //  Created by Andrew Edwards on 5/4/19.
 //
 import Foundation
+import Vapor
 
 /// The [Session Object.](https://stripe.com/docs/api/checkout/sessions/object)
-public struct Session: Codable {
+public struct Session: @unchecked Sendable, Codable, Content {
     /// Unique identifier for the object. Used to pass to redirectToCheckout in Stripe.js.
     public var id: String
     /// The URL the customer will be directed to if they decide to cancel payment and return to your website.
